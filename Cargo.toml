@@ -1,0 +1,66 @@
+[package]
+name = "chrome_cookies"
+version = "0.1.0"
+edition = "2021"
+
+authors = ["码魂"]
+description="Export passwords/cookies/history/bookmarks from browser"
+
+license = "MIT"
+repository = "https://github.com/pkptzx/"
+homepage = "https://github.com/pkptzx"
+readme = "README.md"
+keywords = ["cli", "diff"]
+categories = ["development-tools"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+base64="0.13.0"
+hex="0.4.3"
+aes-gcm= "0.10.1"
+serde_json="1.0"
+rusqlite ={ version="0.28.0",features = ["bundled"] } #winsqlite3
+tabled="0.8.0"
+clap = {version = "3.2.20",features = ["derive"]}
+anyhow = "1.0.64"
+
+[dependencies.windows]
+version = "0.39.0"
+features = [
+        "Data_Xml_Dom",
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Threading",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_Security_Cryptography",
+    "Foundation",
+    "Storage_Streams",
+    "Security_Cryptography_DataProtection",
+    "Win32_System_WinRT",
+    "Win32_System_Services",
+    "Win32_System_Memory_NonVolatile",
+]
+
+
+
+
+
+
+
+
+
+
+[profile.release]
+# 0：不进行优化，并且激活#[cfg(debug_assertions)]属性。
+# 1：允许基本优化。
+# 2：允许常用的优化。
+# 3：允许所有的优化。(release默认)
+# "s"：允许常用的优化，外加一些能缩小体积的优化。
+# "z"：类似"s"，但更偏重于体积的优化(可能会降低性能)。
+opt-level = "z"
+# true("fat") or "thin"
+lto = true
+# 并行编译生成,默认值是16或256
+codegen-units = 1
+panic = "abort"
